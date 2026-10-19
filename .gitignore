@@ -1,0 +1,8 @@
+.env
+venv/
+cache/
+__pycache__/
+chroma/
+logs/
+data/raw_reviews.csv
+data/reviews_clean.csv

@@ -1,0 +1,61 @@
+{
+  "fee_issue": "brokerage",
+  "bullets": [
+    {
+      "text": "Brokerage is a fee Groww charges for processing a trade.",
+      "source": "help_delivery",
+      "evidence": [
+        "Brokerage: This is Groww's fee for processing your trade."
+      ]
+    },
+    {
+      "text": "Equity brokerage is ₹20 or 0.1% per executed order, whichever is lower, minimum ₹5.",
+      "source": "pricing",
+      "evidence": [
+        "Equity Brokerage\n₹20\n0.1% per executed order\nwhichever is lower, minimum ₹5"
+      ]
+    },
+    {
+      "text": "When selling shares, a DP charge of ₹20.00 (male) or ₹19.75 (female) is applied for debit values ₹100 or more, plus GST.",
+      "source": "help_delivery",
+      "evidence": [
+        "For debit (sale) values of ₹100 or more: Male investors: ₹3.50 (Depository) + ₹16.50 (Groww) = ₹20.00 (plus GST)",
+        "Female investors: ₹3.25 (Depository) + ₹16.50 (Groww) = ₹19.75 (plus GST)"
+      ]
+    },
+    {
+      "text": "Exchanges, SEBI, and the government charge fees such as stamp duty, exchange transaction charges, and SEBI turnover charges.",
+      "source": "help_delivery",
+      "evidence": [
+        "External Charges (Set by Exchanges & Government):\nStamp Duty: A government tax. It's ₹0 for selling stocks and 0.015% of the buying value for buying stocks.\nExchange Transaction Charges: Fees from the stock exchanges (NSE or BSE) for using their trading platform. It's 0.00297% for NSE trades or 0.00375% for BSE trades.\nSEBI Turnover Charges: A small fee from SEBI on your total trade value. It's 0.0001%."
+      ]
+    },
+    {
+      "text": "GST at 18% is added on top of brokerage, DP charges, exchange transaction charges, SEBI turnover charges, and other applicable fees.",
+      "source": "help_delivery",
+      "evidence": [
+        "GST (Goods and Services Tax): 18% applied to all the charges mentioned above (like brokerage, exchange charges, SEBI charges, DP charges)."
+      ]
+    },
+    {
+      "text": "Account opening and maintenance charges are ₹0.",
+      "source": "pricing",
+      "evidence": [
+        "Account Opening\n₹0\ntrading & demat opening\nAccount Maintenance Charges\n₹0\nmaintenance charges"
+      ]
+    }
+  ],
+  "needs_human_review": false,
+  "dropped": 0,
+  "last_checked": "2026-10-18",
+  "source_links": [
+    {
+      "title": "Groww Pricing - Brokerage Charges & Pricing",
+      "url": "https://groww.in/pricing"
+    },
+    {
+      "title": "Groww Help - What is the charge for buy order (delivery)?",
+      "url": "https://groww.in/help/stocks,-f&o,-ipo-&-mtf/sx-pricing/what-is-the-charge-for-buy-order-delivery"
+    }
+  ]
+}

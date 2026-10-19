@@ -1,0 +1,38 @@
+{
+  "fee_issue": "brokerage",
+  "keyword_candidates": 340,
+  "stance_counts": {
+    "confused": 28,
+    "complaint_only": 247,
+    "praise": 23,
+    "unrelated": 42
+  },
+  "confused_by_fee": {
+    "other": 18,
+    "brokerage": 5,
+    "dp_charges": 2,
+    "withdrawal_charges": 1,
+    "amc_charges": 1,
+    "gst_taxes": 1
+  },
+  "all_by_fee": {
+    "other": 67,
+    "brokerage": 178,
+    "gst_taxes": 11,
+    "exit_load": 2,
+    "withdrawal_charges": 8,
+    "platform_fee": 7,
+    "none": 9,
+    "dp_charges": 8,
+    "margin_interest": 3,
+    "account_charges": 2,
+    "amc_charges": 3
+  },
+  "confused_review_ids": [
+    "06e3c440-2dc6-4f3e-b1b2-1bb3e918b997",
+    "fc38e1ad-a5c6-4d48-bf22-231573eaafce",
+    "a5bb0231-e5f2-46df-985a-46b559a577e0",
+    "47da3949-3a79-403a-a908-25f46cd25bff",
+    "e651315f-a8aa-4540-9b8d-dc2468d1fc51"
+  ]
+}

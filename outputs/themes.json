@@ -1,0 +1,75 @@
+{
+  "themes": [
+    {
+      "id": "T2",
+      "name": "Customer Support & Service",
+      "description": "Many reviews highlight slow or unresponsive support and unresolved issues.",
+      "total": 234,
+      "low_star": 198,
+      "low_share": 0.8461538461538461,
+      "rank": 1,
+      "quote": {
+        "review_id": "2b5a79bb-c01d-404f-8ccd-b923de4b3eb9",
+        "quote": "Human agents are not replying in chat and there is a very large time of waiting to connect to human on call",
+        "substring_verified": true,
+        "rating": 1,
+        "date": "2026-09-07"
+      }
+    },
+    {
+      "id": "T1",
+      "name": "App Performance & Stability",
+      "description": "Users frequently report lag, crashes, and data refresh problems.",
+      "total": 278,
+      "low_star": 190,
+      "low_share": 0.6834532374100719,
+      "rank": 2,
+      "quote": {
+        "review_id": "83badca7-3a1c-456a-ad85-90adb6c12b2f",
+        "quote": "lots of lagging like 15-20 second I have to wait every time for loading the charts",
+        "substring_verified": true,
+        "rating": 1,
+        "date": "2026-07-30"
+      }
+    },
+    {
+      "id": "T5",
+      "name": "Feature Requests & Improvements",
+      "description": "Users suggest adding new tools, better charting, and additional investment options.",
+      "total": 244,
+      "low_star": 70,
+      "low_share": 0.28688524590163933,
+      "rank": 3,
+      "quote": {
+        "review_id": "60ba7514-3d60-4dc1-818c-d02e5de2be44",
+        "quote": "there is no user friendly option to check IPO in the dashboard itself. why there should be an app where we have to manually SEARCH AS ipo instead we can check in any website know. Try to add an tab for IPO where all options available so that even a beginner or layman could use the app.",
+        "substring_verified": true,
+        "rating": 1,
+        "date": "2026-08-13"
+      }
+    },
+    {
+      "id": "T3",
+      "name": "Fees & Charges",
+      "description": "High brokerage, tax, and other fees are a common complaint.",
+      "total": 125,
+      "low_star": 68,
+      "low_share": 0.544,
+      "rank": 4
+    },
+    {
+      "id": "T4",
+      "name": "Positive Experience & Ease of Use",
+      "description": "Several users praise the app’s simplicity, smooth trading, and overall satisfaction.",
+      "total": 919,
+      "low_star": 23,
+      "low_share": 0.025027203482045703,
+      "rank": 5
+    }
+  ],
+  "top": [
+    "T2",
+    "T1",
+    "T5"
+  ]
+}
