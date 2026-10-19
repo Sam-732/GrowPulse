@@ -1,0 +1,5 @@
+{"ts": "2026-10-19T18:23:23", "step": "approval", "status": "APPROVED", "sha256": "8031d3a00530a6fbd3a47bce39656c61e0f746847e386fbded21f83f0e218714"}
+{"ts": "2026-10-19T18:23:26", "step": "1 read_doc (duplicate check)", "status": "ok", "chars": 2469}
+{"ts": "2026-10-19T18:23:26", "step": "3 append_to_doc", "status": "skipped", "reason": "entry already in doc (resume)"}
+{"ts": "2026-10-19T18:23:26", "step": "5 re-check hash", "status": "ok", "sha256": "8031d3a00530a6fbd3a47bce39656c61e0f746847e386fbded21f83f0e218714"}
+{"ts": "2026-10-19T18:23:27", "step": "6 create_email_draft", "status": "ok", "result": "[{\"id\":\"r7763625196157333018\",\"message\":{\"id\":\"1a1543958fa7e881\",\"threadId\":\"1a1543958fa7e881\",\"labelIds\":[\"DRAFT\"]}}]"}
