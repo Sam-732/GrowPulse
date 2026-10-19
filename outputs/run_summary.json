@@ -1,0 +1,21 @@
+{
+  "app": "Groww (com.nextbillion.groww)",
+  "raw_fetched": 12800,
+  "clean": 3831,
+  "sample": 1800,
+  "weeks": 12,
+  "first_week": "2026-07-27",
+  "last_week": "2026-10-12",
+  "date_min": "2026-07-27",
+  "date_max": "2026-10-17",
+  "rating_mix": {
+    "1": 487,
+    "2": 62,
+    "3": 103,
+    "4": 158,
+    "5": 990
+  },
+  "low_star_in_sample": 549,
+  "classifier_model": "openai/gpt-oss-20b",
+  "judge_model": "openai/gpt-oss-120b"
+}

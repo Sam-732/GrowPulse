@@ -1,0 +1,9 @@
+google-play-scraper
+pandas
+python-dotenv
+httpx
+beautifulsoup4
+lxml
+chromadb
+mcp
+truststore

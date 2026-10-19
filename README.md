@@ -1,18 +1,50 @@
-# review-pulse
+# GrowPulse
 
-Groww (Play Store `com.nextbillion.groww`) reviews -> weekly product pulse + a fact-checked fee explainer -> human approval -> Google Doc entry and Gmail **draft** through an n8n MCP server. Nothing is ever sent.
+GrowPulse turns Groww (Play Store `com.nextbillion.groww`) reviews into a weekly product pulse and a fact-checked fee explainer, then publishes them only after a human approves: a Google Doc entry and a Gmail **draft** through an n8n MCP server. Nothing is ever sent. (Independent student project, not affiliated with Groww.)
 
 Rule that runs through everything: **the AI sorts, code counts.** The LLM never produces a count, percentage or ranking; Python computes every number and inserts it. Quotes are copied from the CSV by code and verified character for character. Source links are hardcoded.
 
-## How to run
+## Live app
+
+**Live link: _add your Streamlit Community Cloud URL here after deploying_** (see "Deploy" below).
+
+The app has 7 pages: Overview, Insights (themes ranked by 1-2 star count with trend arrows and searchable real reviews), Weekly pulse, Fee explainer (per-bullet source, judge verdict, label counts), Approve & publish, History, Checks. Pages read saved files under `outputs/` and `data/`; **they never scrape or call Groq on load.** The Approve page calls the same functions as `approve.py` and is protected by `APP_PASSWORD` plus typing `APPROVE`.
+
+### Run the app locally
 
 ```bash
 python -m venv venv
-venv\Scripts\pip install -r requirements.txt
+venv\Scripts\pip install -r requirements.txt     # app dependencies only
+copy .env.example .env                            # fill N8N_MCP_URL, N8N_MCP_TOKEN, APP_PASSWORD
+venv\Scripts\python -m streamlit run app/Home.py
+```
+
+Without `APP_PASSWORD` the Approve page shows the exact text and fingerprint but publishing is switched off.
+
+### Deploy on Streamlit Community Cloud
+
+1. Push this repo to GitHub (public is fine: no secrets are committed; `.env`, `venv/`, `cache/` are git-ignored).
+2. At share.streamlit.io choose **New app**, pick the repo and branch `main`, and set the main file to `app/Home.py`.
+3. Under **Advanced settings > Secrets** paste (TOML):
+   ```toml
+   N8N_MCP_URL = "https://<your-n8n>/mcp/review-pulse"
+   N8N_MCP_TOKEN = "<bearer token>"
+   APP_PASSWORD = "<a strong password>"
+   GROQ_API_KEY = "<optional: only needed if you later re-run the pipeline there>"
+   ```
+4. Deploy. `requirements.txt` at the repo root is the app-only list; the full pipeline list is `requirements-pipeline.txt`.
+
+Because this repo is public, anyone can open the site; only someone with `APP_PASSWORD` who also types `APPROVE` can write to the Doc. Use a strong password. On Streamlit Cloud the filesystem resets on restart, so approval logs from runs made on the live site are not kept unless you commit them; the History page shows the logs committed in the repo.
+
+## Run the pipeline
+
+```bash
+python -m venv venv
+venv\Scripts\pip install -r requirements-pipeline.txt
 copy .env.example .env        # then fill in the values (never commit .env)
 ```
 
-`.env` needs `GROQ_API_KEY`, `N8N_MCP_URL`, `N8N_MCP_TOKEN` (`GROQ_MODEL` defaults to `openai/gpt-oss-20b`).
+`.env` needs `GROQ_API_KEY`, `N8N_MCP_URL`, `N8N_MCP_TOKEN`, and `APP_PASSWORD` for the web app (`GROQ_MODEL` defaults to `openai/gpt-oss-20b`).
 
 | Step | Command | Output |
 |---|---|---|
@@ -24,7 +56,8 @@ copy .env.example .env        # then fill in the values (never commit .env)
 | 5b RAG fee explainer + judge | `python explainer.py` | `outputs/fee_explainer.md` |
 | 6 MCP connection test | `python mcp_client.py` | must list exactly 3 tools |
 | 7 approve and publish | `python approve.py` | Doc entry + Gmail draft, `logs/` |
-| 8 validation (no AI) | `python validate.py` | `outputs/validation_report.md` |
+| 8 validation (no AI) | `python validate.py` | `outputs/validation_report.md`, `outputs/validation_results.json` |
+| 9 run summary for the app | `python make_summary.py` | `outputs/run_summary.json` |
 
 Also written by `approve.py`: `outputs/email_draft.txt`, `outputs/sources.md`. n8n setup: [docs/n8n_setup.md](docs/n8n_setup.md). Every LLM response is cached in `cache/`, so re-runs are free; Groq 429s are retried with backoff.
 

@@ -1,4 +1,4 @@
-# Validation report (2026-10-19 14:38)
+# Validation report (2026-10-19 18:18)
 ```
 
 [Data]
@@ -49,7 +49,7 @@
   PASS  doc entry contains all 6 required fields   (missing [])
   PASS  approve.py requires the exact string APPROVE
   PASS  no 'send' tool exists on the MCP server (live) and tool set is exactly 3   (['append_to_doc', 'create_email_draft', 'read_doc'])
-  FAIL  append_to_doc is configured to insert (not 'Old_Text' replace)   (params ['actionFields0_Old_Text'])
+  PASS  append_to_doc is configured to insert (not 'Old_Text' replace)   (params ['entry_text'])
   PASS  .env, venv/, cache/ are git-ignored and .env is not tracked
   PASS  no API key or MCP token in any tracked/working source file   (hits [])
   PASS  LLM responses are cached (cache/ non-empty)   (140 cached responses)
@@ -65,5 +65,5 @@
   PASS  validator rejects: username column   (PII column present)
   PASS  validator accepts a clean frame
   PASS  validator accepts the real sample
-48/49 checks passed
+49/49 checks passed
 ```

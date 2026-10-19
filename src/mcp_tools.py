@@ -1,5 +1,6 @@
 """Shared MCP connection helper for mcp_client.py and approve.py (n8n MCP Server Trigger, Bearer auth)."""
 import contextlib
+import json
 import os
 
 import truststore
@@ -65,3 +66,15 @@ async def open_session():
 def text_of(result) -> str:
     """Join the text parts of an MCP tool result."""
     return "\n".join(getattr(c, "text", "") for c in result.content)
+
+
+def doc_text(result) -> str:
+    """Plain document text from a read_doc result (n8n returns JSON: [{"documentId":..., "content":...}])."""
+    raw = text_of(result)
+    try:
+        data = json.loads(raw)
+    except ValueError:
+        return raw
+    if isinstance(data, dict):
+        data = [data]
+    return "".join(str(d.get("content", "")) for d in data if isinstance(d, dict))

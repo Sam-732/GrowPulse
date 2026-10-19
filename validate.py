@@ -328,7 +328,8 @@ def _():
             token = line.split("=", 1)[1].strip()
     hits = []
     for p in list(Path(".").glob("*.py")) + list(Path("src").glob("*.py")) + list(Path(".").glob("*.md")) \
-            + list(Path("outputs").glob("*")) + list(Path("docs").glob("*")):
+            + list(Path("outputs").glob("*")) + list(Path("docs").glob("*")) + list(Path("app").rglob("*.py")) \
+            + list(Path(".streamlit").glob("*")) + list(Path("logs").glob("approve_*.jsonl")):
         t = p.read_text(encoding="utf-8", errors="ignore")
         if secret_rx.search(t) or (token and token in t):
             hits.append(str(p))
@@ -389,6 +390,10 @@ def main() -> int:
     summary = f"\n{passed}/{len(RESULTS)} checks passed"
     text = "\n".join(lines) + summary
     print(text)
+    (OUT / "validation_results.json").write_text(json.dumps(
+        {"generated": datetime.now().isoformat(timespec="seconds"), "passed": passed, "total": len(RESULTS),
+         "checks": [{"area": a, "name": n, "ok": ok, "detail": dt} for a, n, ok, dt in RESULTS]},
+        indent=2, ensure_ascii=False), encoding="utf-8")
     (OUT / "validation_report.md").write_text(f"# Validation report ({datetime.now():%Y-%m-%d %H:%M})\n```\n{text}\n```\n",
                                               encoding="utf-8")
     return 0 if passed == len(RESULTS) else 1

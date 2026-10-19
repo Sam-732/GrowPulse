@@ -185,7 +185,7 @@ def main() -> None:
             break
     bullets = bullets[:MAX_BULLETS]                      # hard cap in code
 
-    report, survivors = [], []
+    report, survivors, audit = [], [], []
     for b in bullets:
         status, cur = [], b
         for round_ in range(2):                          # original + one regeneration
@@ -200,7 +200,12 @@ def main() -> None:
                 if not nxt:
                     break
                 cur = nxt
+        passed = any(res == "PASS" for _, res, _ in status)
         report.append((b["text"], status))
+        audit.append({"draft": b["text"], "final": survivors[-1]["text"] if passed else None,
+                      "source": (survivors[-1]["source"] if passed else b.get("source")),
+                      "regenerated": len(status) > 1, "dropped": not passed,
+                      "checks": [{"stage": st, "result": res, "reason": why} for st, res, why in status]})
 
     print("\nBULLET CHECKS:")
     for text, st in report:
@@ -220,6 +225,7 @@ def main() -> None:
     OUT_JSON.write_text(json.dumps({
         "fee_issue": FEE_ISSUE, "bullets": survivors, "needs_human_review": needs_review,
         "dropped": len(bullets) - len(survivors), "last_checked": checked,
+        "judge_model": JUDGE_MODEL, "audit": audit,
         "source_links": [{"title": meta[s]["title"], "url": meta[s]["url"]} for s in EXPLAINER_SOURCES],
     }, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\nsurvivors: {len(survivors)}/{len(bullets)} | NEEDS HUMAN REVIEW: {needs_review}\n")

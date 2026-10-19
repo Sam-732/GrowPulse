@@ -18,7 +18,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
-from src.mcp_tools import McpConfigError, open_session, text_of
+from src.mcp_tools import McpConfigError, doc_text, open_session, text_of
 
 OUT = Path("outputs")
 LOGS = Path("logs")
@@ -73,15 +73,29 @@ def build() -> dict:
 
 
 class Log:
-    def __init__(self):
+    """JSONL step log. `on_event(record)` lets a UI (the Streamlit app) show steps live."""
+
+    def __init__(self, on_event=None):
         LOGS.mkdir(exist_ok=True)
         self.path = LOGS / f"approve_{datetime.now():%Y%m%d_%H%M%S}.jsonl"
+        self.on_event = on_event
 
     def __call__(self, step: str, status: str, **detail):
         rec = {"ts": datetime.now().isoformat(timespec="seconds"), "step": step, "status": status, **detail}
         with self.path.open("a", encoding="utf-8") as f:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         print(f"  [{status}] {step}")
+        if self.on_event:
+            self.on_event(rec)
+
+
+def reject(approved: dict, reason: str, log: "Log") -> None:
+    """Record a rejection. Writes nothing to the doc or Gmail."""
+    log("approval", "REJECTED", reason=reason, sha256=approved["hash"])
+
+
+def accept(approved: dict, log: "Log") -> None:
+    log("approval", "APPROVED", sha256=approved["hash"])
 
 
 def state_path(entry_id: str) -> Path:
@@ -126,7 +140,7 @@ async def publish(approved: dict, log: Log) -> bool:
                                "(Actions > Insert, Text set by the model) and try again. Nothing was written.")
 
         r = await s.call_tool("read_doc", {})
-        before = text_of(r)
+        before = doc_text(r)
         log("1 read_doc (duplicate check)", "ok", chars=len(before))
         landed = norm(approved["doc_entry"]) in norm(before)
         if f"ENTRY_ID: {eid}" in before and not landed:
@@ -143,7 +157,7 @@ async def publish(approved: dict, log: Log) -> bool:
                 raise RuntimeError("append_to_doc returned an error.")
             log("3 append_to_doc", "ok")
             save_state(eid, doc_appended=True, hash=approved["hash"])
-            after = text_of(await s.call_tool("read_doc", {}))
+            after = doc_text(await s.call_tool("read_doc", {}))
             if norm(approved["doc_entry"]) not in norm(after):
                 log("4 read_doc (verify)", "FAIL")
                 raise RuntimeError("The doc was written but the entry could not be read back; check the doc.")
@@ -158,6 +172,19 @@ async def publish(approved: dict, log: Log) -> bool:
         log("6 create_email_draft", "ok", result=text_of(r)[:200])
         save_state(eid, draft_created=True)
     return True
+
+
+def finish(approved: dict, log: Log) -> tuple[bool, str]:
+    """Run the post-approval steps with friendly errors. Used by BOTH approve.py and the web app."""
+    try:
+        asyncio.run(publish(approved, log))
+    except McpConfigError as e:
+        log("error", "FAIL", detail=repr(e))
+        return False, f"Could not finish: {e}"
+    except Exception as e:                       # noqa: BLE001 - friendly sentence, detail in the log
+        log("error", "FAIL", detail=repr(e))
+        return False, f"Stopped: {e} (details in {log.path})"
+    return True, f"Done. Check your Google Doc and Gmail Drafts. Log: {log.path}"
 
 
 def main() -> int:
@@ -179,22 +206,13 @@ def main() -> int:
     answer = input("Type APPROVE (exact, capitals) to write the doc entry and create the Gmail draft: ")
     if answer != "APPROVE":
         reason = input("Rejected. Why? ")
-        log("approval", "REJECTED", reason=reason, sha256=approved["hash"])
+        reject(approved, reason, log)
         print("Nothing was written.")
         return 1
-    log("approval", "APPROVED", sha256=approved["hash"])
-    try:
-        asyncio.run(publish(approved, log))
-    except McpConfigError as e:
-        log("error", "FAIL", detail=repr(e))
-        print(f"Could not finish: {e}")
-        return 1
-    except Exception as e:                       # noqa: BLE001 - friendly sentence, detail in the log
-        log("error", "FAIL", detail=repr(e))
-        print(f"Stopped: {e} (details in {log.path})")
-        return 1
-    print(f"\nDone. Check your Google Doc and Gmail Drafts. Log: {log.path}")
-    return 0
+    accept(approved, log)
+    ok, msg = finish(approved, log)
+    print(msg)
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

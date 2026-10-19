@@ -1,9 +1,6 @@
-google-play-scraper
+streamlit>=1.50,<2
 pandas
-python-dotenv
 httpx
-beautifulsoup4
-lxml
-chromadb
-mcp
+python-dotenv
 truststore
+mcp==2.3.0

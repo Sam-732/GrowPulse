@@ -1,0 +1,301 @@
+{
+  "generated": "2026-10-19T18:18:40",
+  "passed": 49,
+  "total": 49,
+  "checks": [
+    {
+      "area": "Data",
+      "name": "required columns exist",
+      "ok": true,
+      "detail": "1800 rows"
+    },
+    {
+      "area": "Data",
+      "name": "no username/email/phone columns or values",
+      "ok": true,
+      "detail": "pii cols [], text hits 0"
+    },
+    {
+      "area": "Data",
+      "name": "span is 8-12 weeks",
+      "ok": true,
+      "detail": "12 weeks"
+    },
+    {
+      "area": "Data",
+      "name": "cap of 150 reviews per week respected",
+      "ok": true,
+      "detail": "max 150/week"
+    },
+    {
+      "area": "Data",
+      "name": "ratings are all integers 1-5",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Data",
+      "name": "review_id unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Themes",
+      "name": "at most 5 themes",
+      "ok": true,
+      "detail": "5 themes"
+    },
+    {
+      "area": "Themes",
+      "name": "exactly 3 top themes",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "area": "Themes",
+      "name": "counts match a from-scratch recount",
+      "ok": true,
+      "detail": "all theme totals and 1-2 star counts match"
+    },
+    {
+      "area": "Themes",
+      "name": "every review has a theme and theme totals sum to the sample size",
+      "ok": true,
+      "detail": "1800 vs 1800"
+    },
+    {
+      "area": "Themes",
+      "name": "ranking follows the written rule (1-2 star desc, share desc, total desc, name)",
+      "ok": true,
+      "detail": "expected top ['T2', 'T1', 'T5'], got ['T2', 'T1', 'T5']"
+    },
+    {
+      "area": "Quotes",
+      "name": "3 stored quotes are verbatim substrings of their CSV review",
+      "ok": true,
+      "detail": "bad []"
+    },
+    {
+      "area": "Quotes",
+      "name": "3 quotes in the pulse appear word for word in the CSV",
+      "ok": true,
+      "detail": "3 quotes, missing []"
+    },
+    {
+      "area": "Quotes",
+      "name": "each pulse quote is 10-25 words",
+      "ok": true,
+      "detail": "[22, 16, 19]"
+    },
+    {
+      "area": "Fee issue",
+      "name": "stance counts match a recount of data/fee_labels.csv",
+      "ok": true,
+      "detail": "{'confused': 28, 'complaint_only': 247, 'unrelated': 42, 'praise': 23}"
+    },
+    {
+      "area": "Fee issue",
+      "name": "fee issue = most frequent fee among 'confused' (ignoring other/none), tie-break per rule",
+      "ok": true,
+      "detail": "expected brokerage, file says brokerage"
+    },
+    {
+      "area": "Fee issue",
+      "name": "all labels are from the allowed sets",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Pulse",
+      "name": "at most 250 words",
+      "ok": true,
+      "detail": "219 words"
+    },
+    {
+      "area": "Pulse",
+      "name": "required sections present (themes, quotes, key observation, actions)",
+      "ok": true,
+      "detail": "missing [], quotes 3"
+    },
+    {
+      "area": "Pulse",
+      "name": "exactly 3 action ideas",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "area": "Pulse",
+      "name": "theme numbers in the pulse equal recomputed counts",
+      "ok": true,
+      "detail": "missing []"
+    },
+    {
+      "area": "Pulse",
+      "name": "fee numbers in the pulse equal fee_issue.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Explainer",
+      "name": "at most 6 bullets (and at least 3)",
+      "ok": true,
+      "detail": "6"
+    },
+    {
+      "area": "Explainer",
+      "name": "exactly 2 official source links, both from the fetched list",
+      "ok": true,
+      "detail": "['https://groww.in/pricing', 'https://groww.in/help/stocks,-f&o,-ipo-&-mtf/sx-pricing/what-is-the-charge-for-buy-order-delivery']"
+    },
+    {
+      "area": "Explainer",
+      "name": "'Last checked' date present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Explainer",
+      "name": "every number in every bullet appears in its cited source",
+      "ok": true,
+      "detail": "bad []"
+    },
+    {
+      "area": "Explainer",
+      "name": "no URLs written inside bullet text (links are hardcoded)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Explainer",
+      "name": "no opinion words",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Explainer",
+      "name": "not marked NEEDS HUMAN REVIEW (>=3 bullets passed number check + judge)",
+      "ok": true,
+      "detail": "dropped 0"
+    },
+    {
+      "area": "Explainer",
+      "name": "explainer topic equals the identified fee issue",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Safety",
+      "name": "approval fingerprint is stable across two independent builds",
+      "ok": true,
+      "detail": "8031d3a00530a6fb"
+    },
+    {
+      "area": "Safety",
+      "name": "email subject has the required format",
+      "ok": true,
+      "detail": "Weekly Product Pulse + Customer Clarification — 2026-10-19"
+    },
+    {
+      "area": "Safety",
+      "name": "doc entry contains all 6 required fields",
+      "ok": true,
+      "detail": "missing []"
+    },
+    {
+      "area": "Safety",
+      "name": "approve.py requires the exact string APPROVE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Safety",
+      "name": "no 'send' tool exists on the MCP server (live) and tool set is exactly 3",
+      "ok": true,
+      "detail": "['append_to_doc', 'create_email_draft', 'read_doc']"
+    },
+    {
+      "area": "Safety",
+      "name": "append_to_doc is configured to insert (not 'Old_Text' replace)",
+      "ok": true,
+      "detail": "params ['entry_text']"
+    },
+    {
+      "area": "Safety",
+      "name": ".env, venv/, cache/ are git-ignored and .env is not tracked",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Safety",
+      "name": "no API key or MCP token in any tracked/working source file",
+      "ok": true,
+      "detail": "hits []"
+    },
+    {
+      "area": "Safety",
+      "name": "LLM responses are cached (cache/ non-empty)",
+      "ok": true,
+      "detail": "140 cached responses"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: empty file",
+      "ok": true,
+      "detail": "missing columns ['review_id', 'text', 'rating', 'date', 'week_start']"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: missing column",
+      "ok": true,
+      "detail": "missing columns ['rating']"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: only 20 rows",
+      "ok": true,
+      "detail": "only 20 rows (<100); 3 weeks of data (need 8-12)"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: rating 0",
+      "ok": true,
+      "detail": "ratings outside 1-5 or non-numeric"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: rating 'good'",
+      "ok": true,
+      "detail": "ratings outside 1-5 or non-numeric"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: phone number in text",
+      "ok": true,
+      "detail": "phone/email found in text"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: 20 weeks of data",
+      "ok": true,
+      "detail": "20 weeks of data (need 8-12)"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator rejects: username column",
+      "ok": true,
+      "detail": "PII column present"
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator accepts a clean frame",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "area": "Bad inputs",
+      "name": "validator accepts the real sample",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

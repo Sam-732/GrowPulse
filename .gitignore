@@ -3,6 +3,8 @@ venv/
 cache/
 __pycache__/
 chroma/
-logs/
+logs/*
+!logs/approve_*.jsonl
 data/raw_reviews.csv
 data/reviews_clean.csv
+.claude/

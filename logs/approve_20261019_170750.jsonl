@@ -1,0 +1,6 @@
+{"ts": "2026-10-19T17:09:31", "step": "approval", "status": "APPROVED", "sha256": "8031d3a00530a6fbd3a47bce39656c61e0f746847e386fbded21f83f0e218714"}
+{"ts": "2026-10-19T17:09:35", "step": "1 read_doc (duplicate check)", "status": "ok", "chars": 78}
+{"ts": "2026-10-19T17:09:35", "step": "2 re-check hash", "status": "ok", "sha256": "8031d3a00530a6fbd3a47bce39656c61e0f746847e386fbded21f83f0e218714"}
+{"ts": "2026-10-19T17:09:36", "step": "3 append_to_doc", "status": "ok"}
+{"ts": "2026-10-19T17:09:37", "step": "4 read_doc (verify)", "status": "FAIL"}
+{"ts": "2026-10-19T17:09:37", "step": "error", "status": "FAIL", "detail": "RuntimeError('The doc was written but the entry could not be read back; check the doc.')"}
