@@ -6,7 +6,7 @@ Rule that runs through everything: **the AI sorts, code counts.** The LLM never 
 
 ## Live app
 
-**Live link: _add your Streamlit Community Cloud URL here after deploying_** (see "Deploy" below).
+**Live app: https://growpulse12312.streamlit.app** (source: https://github.com/Sam-732/GrowPulse; deployment steps below).
 
 The app has 7 pages: Overview, Insights (themes ranked by 1-2 star count with trend arrows and searchable real reviews), Weekly pulse, Fee explainer (per-bullet source, judge verdict, label counts), Approve & publish, History, Checks. Pages read saved files under `outputs/` and `data/`; **they never scrape or call Groq on load.** The Approve page calls the same functions as `approve.py` and is protected by `APP_PASSWORD` plus typing `APPROVE`.
 
